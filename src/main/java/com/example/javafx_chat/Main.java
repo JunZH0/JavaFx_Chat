@@ -19,6 +19,7 @@ public class Main extends Application {
 
 
 
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Cargar ventana de diálogo
@@ -42,7 +43,8 @@ public class Main extends Application {
             System.exit(0);
         } else {
             // Crear usuario
-            User user = new User(userName);
+            User user = new User(userName, chatController);
+
 
             // Cargar ventana de chat
             FXMLLoader chatLoader = new FXMLLoader(getClass().getResource("Chat.fxml"));

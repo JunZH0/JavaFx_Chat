@@ -13,11 +13,10 @@ public class ThreadUser implements Runnable {
     private BufferedReader bfRd;
     private ChatController chatController;
 
-    public ThreadUser(Socket socket, ChatController chatController) throws IOException {
+    public ThreadUser(Socket socket) throws IOException {
         this.chatController = chatController;
         this.bfRd = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
-
 
     @Override
     public void run() {
@@ -25,6 +24,8 @@ public class ThreadUser implements Runnable {
             while (true) {
                 String message = bfRd.readLine();
                 Platform.runLater(() -> chatController.displayMessage(message));
+
+
             }
         } catch (SocketException e) {
             System.out.println("Has salido del chat");

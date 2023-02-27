@@ -15,18 +15,21 @@ public class User {
 
     ChatController chatController;
 
-    public User(String userName) throws IOException {
+    public User(String userName, ChatController chatController) throws IOException {
         this.userName = userName;
+        this.chatController = chatController;
         this.socket = new Socket("localhost", 5000);
         this.out = new PrintWriter(socket.getOutputStream(), true);
-        this.threadUser = new ThreadUser(socket, chatController);
+        this.threadUser = new ThreadUser(socket);
         new Thread(threadUser).start();
         out.println(userName + ": se ha conectado al chat");
     }
 
+
     public void sendMessage(String message) {
         out.println(userName + ": " + message);
     }
+
 
     public void close() {
         out.println(userName + ": ha cerrado sesión");
