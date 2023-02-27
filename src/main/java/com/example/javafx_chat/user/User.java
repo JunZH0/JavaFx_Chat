@@ -1,17 +1,11 @@
-package com.example.javafx_chat;
+package com.example.javafx_chat.user;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Optional;
-import java.util.Scanner;
 
-import javafx.application.Platform;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextInputDialog;
+import com.example.javafx_chat.controller.ChatController;
 
 import java.io.PrintWriter;
-import java.net.Socket;
-import java.util.Scanner;
 
 public class User {
     private String userName;

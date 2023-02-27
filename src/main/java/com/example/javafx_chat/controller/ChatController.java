@@ -1,6 +1,7 @@
-package com.example.javafx_chat;
+package com.example.javafx_chat.controller;
 
 
+import com.example.javafx_chat.user.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -39,8 +40,11 @@ public class ChatController {
         user.sendMessage(message);
         // Append message to chat area
         chatArea.appendText("Yo: " + message + " \n");
-
         msgField.clear();
+        // show message in chat area
+
+
+
 
     }
 

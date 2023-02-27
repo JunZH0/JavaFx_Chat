@@ -1,4 +1,4 @@
-package com.example.javafx_chat;
+package com.example.javafx_chat.server;
 
 import java.io.*;
 import java.net.Socket;

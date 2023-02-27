@@ -1,5 +1,6 @@
-package com.example.javafx_chat;
+package com.example.javafx_chat.user;
 
+import com.example.javafx_chat.controller.ChatController;
 import javafx.application.Platform;
 
 import java.io.BufferedReader;

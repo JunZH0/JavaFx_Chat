@@ -1,4 +1,4 @@
-package com.example.javafx_chat;
+package com.example.javafx_chat.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

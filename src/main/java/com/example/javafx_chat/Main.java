@@ -1,11 +1,13 @@
 package com.example.javafx_chat;
 
 
+import com.example.javafx_chat.controller.ChatController;
+import com.example.javafx_chat.controller.DialogController;
+import com.example.javafx_chat.user.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -19,42 +21,45 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Load dialog FXML file
+        // Cargar ventana de diálogo
         FXMLLoader dialogLoader = new FXMLLoader(getClass().getResource("Dialog.fxml"));
         Parent dialogRoot = dialogLoader.load();
         dialogController = dialogLoader.getController();
 
-        // Create dialog stage
+        // Crea la ventana de diálogo
         Stage dialogStage = new Stage();
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogStage.setScene(new Scene(dialogRoot));
         dialogStage.showAndWait();
 
 
-        // Retrieve user name from dialog controller
+        // Obtener el nombre de usuario
         String userName = dialogController.getUserName();
 
-// If user name is empty, exit
+        // comprobar si el nombre de usuario está vacío
         if (userName.isEmpty()) {
-            return;
+            System.out.println("No se ha introducido ningún nombre");
+            System.exit(0);
         } else {
-
-            // Create user and pass user name
+            // Crear usuario
             User user = new User(userName);
 
-            // Load chat window FXML file
+            // Cargar ventana de chat
             FXMLLoader chatLoader = new FXMLLoader(getClass().getResource("Chat.fxml"));
             Parent chatRoot = chatLoader.load();
             chatController = chatLoader.getController();
 
-            // Create chat stage
+            // Crear ventana de chat
             Stage chatStage = new Stage();
             chatStage.setScene(new Scene(chatRoot));
             chatStage.show();
+            // mostrar mensaje de bienvenida
+            chatController.displayMessage("Bienvenido " + userName + "!" + "\nRecuerda no faltar al respeto a nadie y no usar palabras malsonantes.");
 
-            // Set chat controller and initialize chat
+            // Inicializar el controlador de chat
             chatController.setUser(user);
             chatController.initialize();
+
         }
     }
 
