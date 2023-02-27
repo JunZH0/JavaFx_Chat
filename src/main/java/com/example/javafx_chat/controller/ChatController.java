@@ -35,16 +35,18 @@ public class ChatController {
 
     @FXML
     private void handleSendButton() {
-        String message = msgField.getText().trim();
-        if (!message.isEmpty()) {
-            // Send message to server
-            user.sendMessage(message);
-            // Append message to chat area
-            chatArea.appendText("Yo: " + message + " \n");
-            msgField.clear();
-        }
-    }
+        String message = msgField.getText();
+        // Send message to server
+        user.sendMessage(message);
+        // Append message to chat area
+        chatArea.appendText("Yo: " + message + " \n");
+        msgField.clear();
+        // show message in chat area
 
+
+
+
+    }
 
     @FXML
     private void handleCloseButton() {
