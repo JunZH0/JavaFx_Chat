@@ -22,11 +22,32 @@ public class User {
         this.threadUser = new ThreadUser(socket, chatController);
         new Thread(threadUser).start();
         out.println(userName + ": se ha conectado al chat");
+
     }
 
     public void sendMessage(String message) {
-        out.println(userName + ": " + message);
+        // Comprobar si es mensaje directo
+        if (message.startsWith("/w ")) {
+            String[] parts = message.split(" ", 3);
+            // comprobar que esta formateado correctamente
+            if (parts.length < 3) {
+                System.out.println("Invalid whisper command. Use '/w <recipient> <message>'.");
+                return;
+            }
+            String recipient = parts[1];
+            String whisperMessage = parts[2];
+            // Comprobar si esta vacio
+            if (recipient.isEmpty()) {
+                System.out.println("Please specify a recipient for the whisper command.");
+                return;
+            }
+            out.println(userName + " (whisper to " + recipient + "): " + whisperMessage);
+        } else {
+            out.println(userName + ": " + message);
+        }
     }
+
+
 
     public void close() {
         out.println(userName + ": ha cerrado sesión");
