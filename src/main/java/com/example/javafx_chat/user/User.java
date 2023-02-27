@@ -15,28 +15,27 @@ public class User {
 
     ChatController chatController;
 
-    public User(String userName) throws IOException {
+    public User(String userName, ChatController chatController) throws IOException {
         this.userName = userName;
         this.socket = new Socket("localhost", 5000);
         this.out = new PrintWriter(socket.getOutputStream(), true);
-        this.threadUser = new ThreadUser(socket, chatController);
+        this.threadUser = new ThreadUser(socket, this.chatController);
         new Thread(threadUser).start();
         out.println(userName + ": se ha conectado al chat");
-
     }
 
     public void sendMessage(String message) {
-        // Comprobar si es mensaje directo
+        // Check if the message is a whisper
         if (message.startsWith("/w ")) {
             String[] parts = message.split(" ", 3);
-            // comprobar que esta formateado correctamente
+            // Check if the whisper command is formatted correctly
             if (parts.length < 3) {
                 System.out.println("Invalid whisper command. Use '/w <recipient> <message>'.");
                 return;
             }
             String recipient = parts[1];
             String whisperMessage = parts[2];
-            // Comprobar si esta vacio
+            // Check if the recipient is empty
             if (recipient.isEmpty()) {
                 System.out.println("Please specify a recipient for the whisper command.");
                 return;
@@ -46,7 +45,6 @@ public class User {
             out.println(userName + ": " + message);
         }
     }
-
 
 
     public void close() {

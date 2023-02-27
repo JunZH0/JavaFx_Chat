@@ -13,8 +13,8 @@ public class ThreadUser implements Runnable {
     private BufferedReader bfRd;
     private ChatController chatController;
 
-    public ThreadUser(Socket socket) throws IOException {
-        this.chatController = chatController;
+    public ThreadUser(Socket socket, ChatController chatController) throws IOException {
+        this.chatController = this.chatController;
         this.bfRd = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
 
