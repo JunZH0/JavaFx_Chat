@@ -1,5 +1,7 @@
 package com.example.javafx_chat;
 
+import javafx.application.Platform;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,7 +12,7 @@ public class ThreadUser implements Runnable {
     private BufferedReader bfRd;
     private ChatController chatController;
 
-    public ThreadUser(Socket socket) throws IOException {
+    public ThreadUser(Socket socket, ChatController chatController) throws IOException {
         this.chatController = chatController;
         this.bfRd = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
@@ -20,7 +22,9 @@ public class ThreadUser implements Runnable {
         try {
             while (true) {
                 String message = bfRd.readLine();
-                chatController.displayMessage(message);
+                Platform.runLater(() -> chatController.displayMessage(message));
+
+
             }
         } catch (SocketException e) {
             System.out.println("Has salido del chat");

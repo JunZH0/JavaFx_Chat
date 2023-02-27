@@ -18,8 +18,8 @@
          </ScrollPane>
          <HBox spacing="10.0">
             <TextField fx:id="msgField" prefHeight="30.0" prefWidth="400.0" />
-            <Button fx:id="sendButton" mnemonicParsing="false" text="Send" prefHeight="30.0" prefWidth="80.0" onAction="#handleSendButton"/>
-            <Button fx:id="closeButton" mnemonicParsing="false" text="Close Chat" prefHeight="30.0" prefWidth="80.0" onAction="#handleCloseButton"/>
+            <Button fx:id="sendButton" mnemonicParsing="false" text="Enviar" prefHeight="30.0" prefWidth="80.0" onAction="#handleSendButton"/>
+            <Button fx:id="closeButton" mnemonicParsing="false" text="Cerrar" prefHeight="30.0" prefWidth="80.0" onAction="#handleCloseButton"/>
          </HBox>
       </VBox>
    </children>

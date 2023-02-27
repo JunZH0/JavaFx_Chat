@@ -38,6 +38,7 @@ public class Main extends Application {
         if (userName.isEmpty()) {
             return;
         } else {
+
             // Create user and pass user name
             User user = new User(userName);
 
@@ -55,9 +56,6 @@ public class Main extends Application {
             chatController.setUser(user);
             chatController.initialize();
         }
-
-
-
     }
 
     public static void main(String[] args) {

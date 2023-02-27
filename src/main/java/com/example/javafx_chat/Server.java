@@ -10,7 +10,7 @@ public class Server {
         ArrayList<Socket> clients = new ArrayList<>();
         HashMap<Socket, String> clientNameList = new HashMap<>();
         try (ServerSocket serversocket = new ServerSocket(5000)) {
-            System.out.println("Servidor iniciado...");
+            System.out.println("Inicializando servidor");
             while (true) {
                 Socket socket = serversocket.accept();
                 clients.add(socket);

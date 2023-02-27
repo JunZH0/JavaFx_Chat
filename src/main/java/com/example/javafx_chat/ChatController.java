@@ -28,7 +28,7 @@ public class ChatController {
 
     public void initialize() {
         // Initialize chat UI
-        chatArea.appendText("Bienvenido al chat!\n");
+        //chatArea.appendText("Bienvenido al chat!\n");
         msgField.requestFocus();
     }
 
@@ -39,6 +39,8 @@ public class ChatController {
         user.sendMessage(message);
         // Append message to chat area
         chatArea.appendText("Yo: " + message + " \n");
+
+        msgField.clear();
 
     }
 

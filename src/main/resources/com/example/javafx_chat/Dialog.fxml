@@ -9,9 +9,9 @@
 <AnchorPane prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafx_chat.DialogController">
     <children>
         <HBox layoutX="83.0" layoutY="88.0" spacing="10.0">
-            <Label text="Name:" />
+            <Label text="Nombre:" />
             <TextField fx:id="nameField" />
         </HBox>
-        <Button fx:id="connectButton" layoutX="182.0" layoutY="146.0" mnemonicParsing="false" text="Connect" onAction="#handleOkButton" />
+        <Button fx:id="connectButton" layoutX="182.0" layoutY="146.0" mnemonicParsing="false" text="Conectar" onAction="#handleOkButton" />
     </children>
 </AnchorPane>

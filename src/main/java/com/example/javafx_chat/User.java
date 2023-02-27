@@ -19,11 +19,13 @@ public class User {
     private PrintWriter out;
     private ThreadUser threadUser;
 
+    ChatController chatController;
+
     public User(String userName) throws IOException {
         this.userName = userName;
         this.socket = new Socket("localhost", 5000);
         this.out = new PrintWriter(socket.getOutputStream(), true);
-        this.threadUser = new ThreadUser(socket);
+        this.threadUser = new ThreadUser(socket, chatController);
         new Thread(threadUser).start();
         out.println(userName + ": se ha conectado al chat");
     }
