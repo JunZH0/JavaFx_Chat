@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+import java.util.HashMap;
+
 public class ChatController {
 
     private User user;
@@ -18,10 +20,9 @@ public class ChatController {
     private TextField msgField;
 
     @FXML
-    private Button sendButton;
-
-    @FXML
     private Button closeButton;
+
+    public HashMap<String, User> userList = new HashMap<>();
 
     public void setUser(User user) {
         this.user = user;
@@ -29,7 +30,6 @@ public class ChatController {
 
     public void initialize() {
         // Initialize chat UI
-        //chatArea.appendText("Bienvenido al chat!\n");
         msgField.requestFocus();
     }
 
@@ -37,15 +37,14 @@ public class ChatController {
     private void handleSendButton() {
         String message = msgField.getText();
         // Send message to server
-        user.sendMessage(message);
-        // Append message to chat area
-        chatArea.appendText("Yo: " + message + " \n");
+        if (!message.isBlank()) {
+            for (String recipient : userList.keySet()) {
+                userList.get(recipient).sendMessage(recipient, message);
+            }
+            chatArea.appendText("Yo: " + message + " \n");
+        }
         msgField.clear();
-        // show message in chat area
-
-
-
-
+        msgField.requestFocus();
     }
 
     @FXML
@@ -54,14 +53,7 @@ public class ChatController {
         closeButton.getScene().getWindow().hide();
     }
 
-    public String getUserName() {
-        return user.getUserName();
-    }
-
     public void displayMessage(String message) {
         chatArea.appendText(message + " \n");
-
     }
-
-
 }

@@ -1,41 +1,49 @@
 package com.example.javafx_chat.user;
 
 import com.example.javafx_chat.controller.ChatController;
-import javafx.application.Platform;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
-import java.net.SocketException;
+import java.util.HashMap;
 
 public class ThreadUser implements Runnable {
-    private BufferedReader bfRd;
-    private ChatController chatController;
 
-    public ThreadUser(Socket socket, ChatController chatController) throws IOException {
-        this.chatController = this.chatController;
-        this.bfRd = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+    private Socket socket;
+    private BufferedReader in;
+
+    ChatController chatController;
+
+    private HashMap<String, User> userList;
+
+    public ThreadUser(Socket socket) throws IOException {
+        this.socket = socket;
+        this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
 
     @Override
     public void run() {
+        userList = chatController.userList;
         try {
-            while (true) {
-                String message = bfRd.readLine();
-                Platform.runLater(() -> chatController.displayMessage(message));
-
-
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                if (inputLine.startsWith("quit")) {
+                    break;
+                }
+                else {
+                    sendMessageToAllUsers(inputLine);
+                }
             }
-        } catch (SocketException e) {
-            System.out.println("Has salido del chat");
-        } catch (IOException exception) {
-            System.out.println(exception);
-        } finally {
-            try {
-                bfRd.close();
-            } catch (Exception exception) {
-                System.out.println(exception);
+        } catch (IOException e) {
+            System.out.println("Exception caught when trying to read from socket: " + e.getMessage());
+        }
+    }
+
+    private void sendMessageToAllUsers(String message) {
+        if (!message.isBlank()) {
+            for (User user : userList.values()) {
+                user.sendMessage(user.getUserName(), message);
             }
         }
     }

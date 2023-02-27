@@ -42,9 +42,16 @@ public class Main extends Application {
             System.out.println("No se ha introducido ningún nombre");
             System.exit(0);
         } else {
-            // Crear usuario
-            User user = new User(userName, chatController);
+            //comprobar que haya servidores disponibles
 
+            // Crear usuario
+            User user = null;
+            try {
+                user = new User(userName, chatController);
+            } catch (Exception e) {
+                System.out.println("No hay servidores disponibles");
+                System.exit(0);
+            }
 
             // Cargar ventana de chat
             FXMLLoader chatLoader = new FXMLLoader(getClass().getResource("Chat.fxml"));
@@ -61,6 +68,7 @@ public class Main extends Application {
             // Inicializar el controlador de chat
             chatController.setUser(user);
             chatController.initialize();
+            chatController.userList.put(userName, user);
 
         }
     }
