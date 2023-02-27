@@ -54,7 +54,7 @@ public class Main extends Application {
             chatStage.setScene(new Scene(chatRoot));
             chatStage.show();
             // mostrar mensaje de bienvenida
-            chatController.displayMessage("Bienvenido " + userName + "!" + "\nRecuerda no faltar al respeto a nadie y no usar palabras malsonantes.");
+            chatController.displayMessage("Bienvenid@ " + userName + "!" + "\nRecuerda no faltar al respeto a nadie y no usar palabras malsonantes.");
 
             // Inicializar el controlador de chat
             chatController.setUser(user);
