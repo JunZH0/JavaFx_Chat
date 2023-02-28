@@ -29,8 +29,17 @@ public class ChatController {
     }
 
     public void initialize() {
-        // Initialize chat UI
-        msgField.requestFocus();
+        // Al presionar ENTER se envía el mensaje y al presionar ESCAPE se cierra la ventana
+        msgField.setOnKeyPressed(event -> {
+            switch (event.getCode()) {
+                case ENTER:
+                    handleSendButton();
+                    break;
+                case ESCAPE:
+                    handleCloseButton();
+                    break;
+            }
+        });
     }
 
     @FXML
